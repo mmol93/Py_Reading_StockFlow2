@@ -22,14 +22,13 @@ def FivedayForeignKOSPI():
         xpath2 = "]/td[3]"
 
         total = []  # 마지막에 출력할 데이터 집합
-        Fivedays_ForeginData = []   # 7일간 외국인 매도량, 매수량 숫자 데이터 리스트
         plus = 0   # 플러스일 경우 +1
         minus = 0   # 마이너스일 경우 +1
         plus_plus = 0   # 연속 +
         minus_minus = 0 # 연속 -
-        final_sign = "" # 최근 연속 매도 매수의 +, - 부호(예: 최근 3일 연속 매수일 경우 +)
         accumulate_sum = 0  # 7일간 매도량, 매수량의 누적 계산 데이터
         stoper = 0
+
         for i in range(1, 8):
             xpath = xpath1 + str(i) + xpath2
             singleData = WebDriverWait(driver, 12).until(EC.presence_of_element_located((By.XPATH, xpath))).text
@@ -77,6 +76,13 @@ def FivedayForeignKOSPI():
         # 출력 메시지 설정
         print("<코스피 7일간 외국인 누적 수급> ", end="")
         print(total)
+
+        # 다른 요소와 연계하기 위해 반환값 주기
+        if plus_plus >= 1:
+            return "+" + str(plus_plus)
+        elif minus_minus >= 1:
+            return "-" + str(minus_minus)
+
     except:
         print("코스피 외국인 수급 7일치 가져오기 - 현물 통신에러")
         driver.quit()
@@ -154,9 +160,10 @@ def FivedayForeignKOSDAQ():
 
         # 다른 요소와 연계하기 위해 반환값 주기
         if plus_plus >= 1:
-            return plus_plus
+            return "+" + str(plus_plus)
         elif minus_minus >= 1:
-            return minus_minus
+            return "-" + str(minus_minus)
+
     except:
         print("코스닥 외국인 수급 7일치 가져오기 - 현물 통신에러")
         driver.quit()
