@@ -23,6 +23,12 @@ def kospiTopTen():
     samsungSDI = "006400"
     hyundai = "005380"
     kakao = "035720"
+    hyundaiMobi = "012330"
+    samsungCNT = "028260"
+    KIA = "000270"
+    POSCO = "005490"
+    lgElect = "066570"
+    skInnovation = "096770"
 
     stockList = []  # 위 종목 코드를 담는 리스트
 
@@ -35,6 +41,31 @@ def kospiTopTen():
     stockList.append(samsungSDI)
     stockList.append(hyundai)
     stockList.append(kakao)
+    stockList.append(hyundaiMobi)
+    stockList.append(samsungCNT)
+    stockList.append(KIA)
+    stockList.append(POSCO)
+    stockList.append(lgElect)
+    stockList.append(skInnovation)
+
+    # 주식의 이름을 담는 리스트
+    stockNameList = []
+    stockNameList.append("삼성전자")
+    stockNameList.append("sk하이닉스")
+    stockNameList.append("LG화학")
+    stockNameList.append("삼성바이오")
+    stockNameList.append("셀트리온")
+    stockNameList.append("네이버")
+    stockNameList.append("삼성SDI")
+    stockNameList.append("현대차")
+    stockNameList.append("카카오")
+    stockNameList.append("현대모비스")
+    stockNameList.append("삼성물산")
+    stockNameList.append("기아차")
+    stockNameList.append("포스코")
+    stockNameList.append("LG전자")
+    stockNameList.append("sk이노베이션")
+
 
 
     ## 종목별 반복(위 코드 변수 갯수만큼 반복)
@@ -107,7 +138,7 @@ def kospiTopTen():
         # 19시 이후에 프로그램 시작했으면 dataValue = 1 / end = 8
 
         # 9~19시 사이에 실시했다면 start = 2 / end = 9
-        if 9 <= datetime.datetime.now().hour <= 19:
+        if 8 <= datetime.datetime.now().hour < 19:
             dateValue_start = 2
             dateValue_end = 9
 
@@ -154,57 +185,14 @@ def kospiTopTen():
                 print("")
             # 위 결과가 3% 넘을 경우 메시지 표기
             if per_result >= 3:
-                # 각 종목별로 메시지 표기를 달리한다(인덱스 0~8까지 있음)
-                if i == 0:
-                    print("삼성전자: " + str(z+1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매수함 / ", end="")
-                    # 3%를 넘긴하는데 코스피 & 개별 종목 둘 다 순매도일 때 출력
-                    if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
-                        print("해당 일 코스피 & 개별종목 둘 다 순매도임")
-                elif i == 1:
-                    print("SK하이닉스:  " + str(z+1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매수함 / ", end="")
-                    if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
-                        print("해당 일 코스피 & 개별종목 둘 다 순매도임")
-                elif i == 2:
-                    print("LG화학:  " + str(z+1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매수함 / ", end="")
-                    if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
-                        print("해당 일 코스피 & 개별종목 둘 다 순매도임")
-                elif i == 3:
-                    print("삼성바이오:  " + str(z+1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매수함 / ", end="")
-                    if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
-                        print("해당 일 코스피 & 개별종목 둘 다 순매도임")
-                elif i == 4:
-                    print("셀트리온:  " + str(z+1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매수함 / ", end="")
-                    if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
-                        print("해당 일 코스피 & 개별종목 둘 다 순매도임")
-                elif i == 5:
-                    print("네이버:  " + str(z+1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매수함 / ", end="")
-                    if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
-                        print("해당 일 코스피 & 개별종목 둘 다 순매도임")
-                elif i == 6:
-                    print("삼성SDI:  " + str(z+1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매수함 / ", end="")
-                    if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
-                        print("해당 일 코스피 & 개별종목 둘 다 순매도임")
-                elif i == 7:
-                    print("현대차:  " + str(z+1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매수함 / ", end="")
-                    if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
-                        print("해당 일 코스피 & 개별종목 둘 다 순매도임")
-                elif i == 8:
-                    print("카카오:  " + str(z+1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매수함 / ", end="")
-                    if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
-                        print("해당 일 코스피 & 개별종목 둘 다 순매도임")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                # 3%를 넘긴하는데 코스닥 & 개별 종목 둘 다 순매도일 때 출력
+                if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
+                    print(stockNameList[i] + ": " + str(z + 1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매도함 / ", end="")
+                else:
+                    print(stockNameList[i] + ": " + str(z + 1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 '매수'함 / ", end="")
+            # 위 결과가 -3%를 넘을 경우 메시지 표기
+            if per_result <= -3:
+                # 코스피는 외인 순매도이지만, 개별 종목의 순매수 금액이 지수 매도금액의 3%를 넘으면 "역매수"로 표기하게 한다
+                # 즉, 개별 종목은 순매수(+), 지수의 외인 매매는 순매도로 (-) 이며동시에 연산 결과가 -3% 이하인 애들
+                if priceXamountList[z] >= 0 and kospiForeignBuying_List[z] <= 0:
+                    print(stockNameList[i] + ": " + str(z + 1) + "일 전에 외인들이 코스피의 " + str(per_result * -1) + "% 만큼 '역매수'함 / ", end="")
