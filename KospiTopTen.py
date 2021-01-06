@@ -29,6 +29,14 @@ def kospiTopTen():
     POSCO = "005490"
     lgElect = "066570"
     skInnovation = "096770"
+    koreaSOE = "009540"
+    kbBank = "105560"
+    CSwind = "112610"
+    NCsoft = "036570"
+    douzone = "012510"
+    skTele = "017670"
+    CJ = "097950"
+    hotelShinra = "008770"
 
     stockList = []  # 위 종목 코드를 담는 리스트
 
@@ -47,6 +55,14 @@ def kospiTopTen():
     stockList.append(POSCO)
     stockList.append(lgElect)
     stockList.append(skInnovation)
+    stockList.append(koreaSOE)
+    stockList.append(kbBank)
+    stockList.append(CSwind)
+    stockList.append(NCsoft)
+    stockList.append(douzone)
+    stockList.append(skTele)
+    stockList.append(CJ)
+    stockList.append(hotelShinra)
 
     # 주식의 이름을 담는 리스트
     stockNameList = []
@@ -65,8 +81,14 @@ def kospiTopTen():
     stockNameList.append("포스코")
     stockNameList.append("LG전자")
     stockNameList.append("sk이노베이션")
-
-
+    stockNameList.append("한국조선해양")
+    stockNameList.append("KB금융")
+    stockNameList.append("씨에스윈드")
+    stockNameList.append("엔씨소프트")
+    stockNameList.append("더존비즈온")
+    stockNameList.append("SK텔레콤")
+    stockNameList.append("CJ제일제당")
+    stockNameList.append("호텔신라")
 
     ## 종목별 반복(위 코드 변수 갯수만큼 반복)
     for i in range(0, len(stockList)):
@@ -184,14 +206,14 @@ def kospiTopTen():
                 # 종목별로 줄바꿈을 실시하기 위해 넣음
                 print("")
             # 위 결과가 3% 넘을 경우 메시지 표기
-            if per_result >= 3:
+            if per_result >= 2.5:
                 # 3%를 넘긴하는데 코스닥 & 개별 종목 둘 다 순매도일 때 출력
                 if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
                     print(stockNameList[i] + ": " + str(z + 1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매도함 / ", end="")
                 else:
                     print(stockNameList[i] + ": " + str(z + 1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 '매수'함 / ", end="")
             # 위 결과가 -3%를 넘을 경우 메시지 표기
-            if per_result <= -3:
+            if per_result <= -2.5:
                 # 코스피는 외인 순매도이지만, 개별 종목의 순매수 금액이 지수 매도금액의 3%를 넘으면 "역매수"로 표기하게 한다
                 # 즉, 개별 종목은 순매수(+), 지수의 외인 매매는 순매도로 (-) 이며동시에 연산 결과가 -3% 이하인 애들
                 if priceXamountList[z] >= 0 and kospiForeignBuying_List[z] <= 0:
