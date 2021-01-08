@@ -8,6 +8,7 @@ import KosdaqTopTen
 import datetime
 import time
 import successiveCompany
+import TenYearsBonds
 
 print("실시 날짜: " + str(datetime.datetime.now().strftime("%Y/%m/%d, %H:%M")))
 # 1. 외국인 연속 수급 일수 가져오기(7일간) - C
@@ -42,6 +43,11 @@ print("------------------------")
 # 6. 신용 잔고 확인 - C
 # 반환값 = 리스트(변동율+,-2.5% 이상 카운터, "xx 일간 연속 매도 or 매수"에서 xx 값)
 CustomerCredit_val = CustomerCredit.customerCredit()
+print("------------------------")
+
+# 7. 매국 10년물 채권금리 - C
+# # 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
+TenYearsBonds_val = TenYearsBonds.america()
 print("------------------------")
 
 ## 1,2,3,4,5 번의 조합 결과
