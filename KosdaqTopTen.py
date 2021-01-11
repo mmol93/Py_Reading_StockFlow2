@@ -54,7 +54,7 @@ def kosdaqTopTen():
         # 주식의 이름을 담는 리스트
         stockNameList = []
         stockNameList.append("셀트리온헬스케어")
-        stockNameList.append("헬트리온제약")
+        stockNameList.append("셀트리온제약")
         stockNameList.append("씨젠")
         stockNameList.append("알테오젠")
         stockNameList.append("에이치엘비")
@@ -106,7 +106,7 @@ def kosdaqTopTen():
 
                 xpath = xpath1 + str(j) + xpath2
 
-                foreignBuyingAmount = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, xpath))).text
+                foreignBuyingAmount = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, xpath))).text
 
                 # 제일 앞에 항상 +, -가 따라오기 때문에 이 +, - 부호를 제거
                 foreignBuyingAmount = foreignBuyingAmount[1:-1]
@@ -122,7 +122,7 @@ def kosdaqTopTen():
                 xpath2 = "]/td[6]"
                 xpath = xpath1 + str(j) + xpath2
 
-                stockPrice = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, xpath))).text
+                stockPrice = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, xpath))).text
 
                 # 계산을 위해 각 데이터에 있는 ,(콤마) 제거
                 stockPrice = stockPrice.replace(",", "")
@@ -173,7 +173,7 @@ def kosdaqTopTen():
                     xpath2 = "]/td[3]"
                     xpath = xpath1 + str(k) + xpath2
 
-                    kosdaqForeignBuying = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, xpath))).text
+                    kosdaqForeignBuying = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, xpath))).text
 
                     # 받은 데이터를 int화 시킨다
                     kosdaqForeignBuying = int(kosdaqForeignBuying.replace(",", ""))

@@ -128,7 +128,7 @@ def kospiTopTen():
 
                 xpath = xpath1 + str(j) + xpath2
 
-                foreignBuyingAmount = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, xpath))).text
+                foreignBuyingAmount = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, xpath))).text
 
                 # 제일 앞에 항상 +, -가 따라오기 때문에 이 +, - 부호를 제거
                 foreignBuyingAmount = foreignBuyingAmount[1:-1]
@@ -144,7 +144,7 @@ def kospiTopTen():
                 xpath2 = "]/td[6]"
                 xpath = xpath1 + str(j) + xpath2
 
-                stockPrice = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, xpath))).text
+                stockPrice = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, xpath))).text
 
                 # 계산을 위해 각 데이터에 있는 ,(콤마) 제거
                 stockPrice = stockPrice.replace(",", "")
@@ -195,7 +195,7 @@ def kospiTopTen():
                     xpath2 = "]/td[3]"
                     xpath = xpath1 + str(k) + xpath2
 
-                    kospiForeignBuying = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, xpath))).text
+                    kospiForeignBuying = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, xpath))).text
 
                     # 받은 데이터를 int화 시킨다
                     kospiForeignBuying = int(kospiForeignBuying.replace(",", ""))
