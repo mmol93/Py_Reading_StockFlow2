@@ -39,6 +39,11 @@ def kospiTopTen():
         skTele = "017670"
         CJ = "097950"
         hotelShinra = "008770"
+        SK = "034730"
+        samsungSDS = "018260"
+        samsungElectronics = "009150"
+        apgroup = "002790"
+        SKbio = "326030"
 
         stockList = []  # 위 종목 코드를 담는 리스트
 
@@ -65,6 +70,11 @@ def kospiTopTen():
         stockList.append(skTele)
         stockList.append(CJ)
         stockList.append(hotelShinra)
+        stockList.append(SK)
+        stockList.append(samsungSDS)
+        stockList.append(samsungElectronics)
+        stockList.append(apgroup)
+        stockList.append(SKbio)
 
         # 주식의 이름을 담는 리스트
         stockNameList = []
@@ -91,6 +101,11 @@ def kospiTopTen():
         stockNameList.append("SK텔레콤")
         stockNameList.append("CJ제일제당")
         stockNameList.append("호텔신라")
+        stockNameList.append("SK")
+        stockNameList.append("삼성SDS")
+        stockNameList.append("삼성전기")
+        stockNameList.append("아모레퍼시픽")
+        stockNameList.append("SK바이오팜")
 
         kospiForeignBuying_List = []  # 코스피 외인 순매수/매도 데이터 리스트
 
@@ -173,7 +188,7 @@ def kospiTopTen():
                 dateValue_start = 2
                 dateValue_end = 9
 
-            # 주말은 항상 18시 이후로 생각한다
+            # 주말은 항상 19시 이후로 생각한다
             if datetime.datetime.now().strftime("%a") == "Sat" or datetime.datetime.now().strftime("%a") == "Sun":
                 dateValue_start = 1
                 dateValue_end = 8
