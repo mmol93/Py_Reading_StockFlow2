@@ -9,6 +9,7 @@ import datetime
 import time
 import successiveCompany
 import TenYearsBonds
+import EWY
 
 print("실시 날짜: " + str(datetime.datetime.now().strftime("%Y/%m/%d, %H:%M")))
 # 1. 외국인 연속 수급 일수 가져오기(7일간) - C
@@ -46,9 +47,12 @@ CustomerCredit_val = CustomerCredit.customerCredit()
 print("------------------------")
 
 # 7. 매국 10년물 채권금리 - C
-# # 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
+## 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
 TenYearsBonds_val = TenYearsBonds.america()
 print("------------------------")
+
+# 8. 한국 지수 EWY - C
+EWY.EWY_Graph()
 
 ## 1,2,3,4,5 번의 조합 결과
 if successiveDollar[0] == "+" and int(successiveDollar[1]) >= 3 and \
