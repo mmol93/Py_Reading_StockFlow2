@@ -157,15 +157,14 @@ def kospiTopTen():
                 # 계산을 위해 각 데이터에 있는 ,(콤마) 제거
                 foreignBuyingAmount = foreignBuyingAmount.replace(",", "")
 
-                # 제일 앞에 항상 +, -가 따라오기 때문에 이 +부호를 제거
+                # 제일 앞에 항상 +가 따라오기 때문에 이 +부호를 제거
                 foreignBuyingAmount = foreignBuyingAmount.replace("+", "")
 
-                # 계산을 위해 int형으로 변경후 리스트에 추가하기
                 if foreignBuyingAmount[0] == "-":
-                    foreignBuyingAmount = foreignBuyingAmount.replace("-", "")
-                    foreignBuyingAmountList.append(int(foreignBuyingAmount) * -1)
-                else:
-                    foreignBuyingAmountList.append(int(foreignBuyingAmount))
+                    foreignBuyingAmount = foreignBuyingAmount[1:]
+
+                # 계산을 위해 int형으로 변경후 리스트에 추가하기
+                foreignBuyingAmountList.append(int(foreignBuyingAmount))
 
 
                 ## 해당 주식의 해당 날의 종가 가져오기
@@ -180,9 +179,10 @@ def kospiTopTen():
                 # 계산을 위해 int형으로 변경후 리스트에 추가하기
                 stockPriceList.append(int(stockPrice))
 
-                ## 해당 주식의 순매도(매수)량 * 종가 (단위는 만 이므로 // 10000을 해준다)
+                ## 해당 주식의 순매도(매수)량 * 종가 (단위는 억 이므로 // 100000000을 해준다)
                 # 즉, 각 종목에 대한 외인들의 매매 금액이다
                 priceXamountList.append((int(foreignBuyingAmount) * int(stockPrice)) // 100000000)
+
 
 
             # print("priceXamountList: ", end= "")    # (삭제) 확인용
@@ -223,7 +223,8 @@ def kospiTopTen():
                     xpath2 = "]/td[3]"
                     xpath = xpath1 + str(k) + xpath2
 
-                    kospiForeignBuying = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, xpath))).text
+                    kospiForeignBuying = WebDriverWait(driver, 30).until(
+                        EC.presence_of_element_located((By.XPATH, xpath))).text
 
                     # 받은 데이터를 int화 시킨다
                     kospiForeignBuying = int(kospiForeignBuying.replace(",", ""))
@@ -247,6 +248,7 @@ def kospiTopTen():
                     # 3%를 넘긴하는데 코스닥 & 개별 종목 둘 다 순매도일 때 출력
                     if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
                         print(stockNameList[i] + ": " + str(z + 1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매도함 / ", end="")
+                    # 개별 종목도 외인들 순매수 + 코스피도 외인 순매수일 때 출력
                     else:
                         print(stockNameList[i] + ": " + str(z + 1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 '매수'함 / ", end="")
                 # 위 결과가 -3%를 넘을 경우 메시지 표기
