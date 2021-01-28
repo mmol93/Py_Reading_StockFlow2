@@ -44,6 +44,9 @@ def kospiTopTen():
         samsungElectronics = "009150"
         apgroup = "002790"
         SKbio = "326030"
+        KospiInverse = "253230"
+        KosdaqInverse = "275750"
+        KospiReverage = "108590"
 
         stockList = []  # 위 종목 코드를 담는 리스트
 
@@ -75,6 +78,9 @@ def kospiTopTen():
         stockList.append(samsungElectronics)
         stockList.append(apgroup)
         stockList.append(SKbio)
+        stockList.append(KospiInverse)
+        stockList.append(KosdaqInverse)
+        stockList.append(KospiReverage)
 
         # 주식의 이름을 담는 리스트
         stockNameList = []
@@ -106,6 +112,9 @@ def kospiTopTen():
         stockNameList.append("삼성전기")
         stockNameList.append("아모레퍼시픽")
         stockNameList.append("SK바이오팜")
+        stockNameList.append("KOSEF 200선물인버스2X")
+        stockNameList.append("KBSTAR 코스닥150선물인버스")
+        stockNameList.append("TREX 200-코스피레버")
 
         kospiForeignBuying_List = []  # 코스피 외인 순매수/매도 데이터 리스트
 
@@ -146,14 +155,14 @@ def kospiTopTen():
                 foreignBuyingAmount = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, xpath))).text
 
                 # 제일 앞에 항상 +, -가 따라오기 때문에 이 +, - 부호를 제거
-                foreignBuyingAmount = foreignBuyingAmount[1:-1]
+                foreignBuyingAmount = foreignBuyingAmount.replace("+", "")
+                foreignBuyingAmount = foreignBuyingAmount.replace("-", "")
 
                 # 계산을 위해 각 데이터에 있는 ,(콤마) 제거
                 foreignBuyingAmount = foreignBuyingAmount.replace(",", "")
 
                 # 계산을 위해 int형으로 변경후 리스트에 추가하기
                 foreignBuyingAmountList.append(int(foreignBuyingAmount))
-
 
                 ## 해당 주식의 해당 날의 종가 가져오기
                 xpath2 = "]/td[6]"
@@ -230,14 +239,14 @@ def kospiTopTen():
                     # 종목별로 줄바꿈을 실시하기 위해 넣음
                     print("")
                 # 위 결과가 3% 넘을 경우 메시지 표기
-                if per_result >= 2.5:
+                if per_result >= 2.0:
                     # 3%를 넘긴하는데 코스닥 & 개별 종목 둘 다 순매도일 때 출력
                     if priceXamountList[z] <= 0 and kospiForeignBuying_List[z] <= 0:
                         print(stockNameList[i] + ": " + str(z + 1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 매도함 / ", end="")
                     else:
                         print(stockNameList[i] + ": " + str(z + 1) + "일 전에 외인들이 코스피의 " + str(per_result) + "% 만큼 '매수'함 / ", end="")
                 # 위 결과가 -3%를 넘을 경우 메시지 표기
-                if per_result <= -2.5:
+                if per_result <= -2.0:
                     # 코스피는 외인 순매도이지만, 개별 종목의 순매수 금액이 지수 매도금액의 3%를 넘으면 "역매수"로 표기하게 한다
                     # 즉, 개별 종목은 순매수(+), 지수의 외인 매매는 순매도로 (-) 이며동시에 연산 결과가 -3% 이하인 애들
                     if priceXamountList[z] >= 0 and kospiForeignBuying_List[z] <= 0:

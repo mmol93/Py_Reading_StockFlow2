@@ -53,6 +53,7 @@ print("------------------------")
 
 # 8. 한국 지수 EWY - C
 EWY.EWY_Graph()
+print("------------------------")
 
 ## 1,2,3,4,5 번의 조합 결과
 if successiveDollar[0] == "+" and int(successiveDollar[1]) >= 3 and \
@@ -68,7 +69,7 @@ if successiveDollar[0] == "-" and int(successiveDollar[1]) >= 3 and \
     print("------------------------")
 
 # 7. 코스피 외인 매매금액과 코스피 상위 top10 종목의 외인 매매금액 비교하기(7일간)
-print("<코스피 외인 매매금액과 top10 외인 매매금액 비교>(3% 이상)", end="")
+print("<코스피 외인 매매금액과 top10 외인 매매금액 비교>(2% 이상)", end="")
 KospiTopTen.kospiTopTen()
 print("")
 print("------------------------")
@@ -76,8 +77,7 @@ print("------------------------")
 time.sleep(3)
 
 # 8. 코스닥 외인 매매금액과 코스닥 상위 top10 종목의 외인 매매금액 비교하기(7일간)
-print("<코스닥 외인 매매금액과 top10 외인 매매금액 비교>(3% 이상)", end="")
+print("<코스닥 외인 매매금액과 top10 외인 매매금액 비교>(2% 이상)", end="")
 KosdaqTopTen.kosdaqTopTen()
 print("")
 print("------------------------")
-
