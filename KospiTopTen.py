@@ -154,15 +154,19 @@ def kospiTopTen():
 
                 foreignBuyingAmount = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, xpath))).text
 
-                # 제일 앞에 항상 +, -가 따라오기 때문에 이 +, - 부호를 제거
-                foreignBuyingAmount = foreignBuyingAmount.replace("+", "")
-                foreignBuyingAmount = foreignBuyingAmount.replace("-", "")
-
                 # 계산을 위해 각 데이터에 있는 ,(콤마) 제거
                 foreignBuyingAmount = foreignBuyingAmount.replace(",", "")
 
+                # 제일 앞에 항상 +, -가 따라오기 때문에 이 +부호를 제거
+                foreignBuyingAmount = foreignBuyingAmount.replace("+", "")
+
                 # 계산을 위해 int형으로 변경후 리스트에 추가하기
-                foreignBuyingAmountList.append(int(foreignBuyingAmount))
+                if foreignBuyingAmount[0] == "-":
+                    foreignBuyingAmount = foreignBuyingAmount.replace("-", "")
+                    foreignBuyingAmountList.append(int(foreignBuyingAmount) * -1)
+                else:
+                    foreignBuyingAmountList.append(int(foreignBuyingAmount))
+
 
                 ## 해당 주식의 해당 날의 종가 가져오기
                 xpath2 = "]/td[6]"
