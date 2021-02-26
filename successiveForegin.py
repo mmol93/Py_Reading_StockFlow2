@@ -100,12 +100,10 @@ def FivedayForeignKOSDAQ():
         xpath2 = "]/td[3]"
 
         total = []  # 마지막에 출력할 데이터 집합
-        Fivedays_ForeginData = []   # 7일간 외국인 매도량, 매수량 숫자 데이터 리스트
         plus = 0   # 플러스일 경우 +1
         minus = 0   # 마이너스일 경우 +1
         plus_plus = 0   # 연속 +
         minus_minus = 0 # 연속 -
-        final_sign = "" # 최근 연속 매도 매수의 +, - 부호(예: 최근 3일 연속 매수일 경우 +)
         accumulate_sum = 0  # 7일간 매도량, 매수량의 누적 계산 데이터
         stoper = 0
         for i in range(1, 8):
