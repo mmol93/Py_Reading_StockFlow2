@@ -197,7 +197,7 @@ def kospiTopTen():
             # 19시 이후에 프로그램 시작했으면 dataValue = 1 / end = 8
 
             # 9~19시 사이에 실시했다면 start = 2 / end = 9
-            if 8 <= datetime.datetime.now().hour < 19:
+            if 9 <= datetime.datetime.now().hour < 19:
                 dateValue_start = 2
                 dateValue_end = 9
 
