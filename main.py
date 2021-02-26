@@ -9,6 +9,7 @@ import KosdaqTopTen
 import datetime
 import time
 import successiveCompany
+import successiveCompany2
 import TenYearsBonds
 import EWY
 
@@ -19,24 +20,26 @@ print("실시 날짜: " + str(datetime.datetime.now().strftime("%Y/%m/%d, %H:%M"
 # 1. 외국인 연속 수급 일수 가져오기(7일간) - C
 # 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
 successiveForeginKOSPI = successiveForegin.FivedayForeignKOSPI()    # 몇 일간 순매수 or 순매도 했는지 일 수 변수
-print("------------------------")
 successiveForeginKOSDAQ = successiveForegin.FivedayForeignKOSDAQ()  # 몇 일간 순매수 or 순매도 했는지 일 수 변수
 print("------------------------")
 
 # 1-2. 외국인 연속 수급 일수 가져오기(20일간) - C
 # # 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
 successiveForeginKOSPI2 = successiveForegin2.TwldayForeignKOSPI()
-print("------------------------")
 successiveForeginKOSDAQ2 = successiveForegin2.TwldayForeignKOSDAQ()
 print("------------------------")
 
 
 
-# 2. 기관 연속 수급 일수 가져오기 ()7일간
+# 2. 기관 연속 수급 일수 가져오기 (7일간)
 # 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
 successiveCompanyKOSPI = successiveCompany.FivedayCompanyKOSPI()    # 몇 일간 순매수 or 순매도 했는지 일 수 변수
-print("------------------------")
 successiveCompanyKOSDAQ = successiveCompany.FivedayCompanyKOSDAQ()  # # 몇 일간 순매수 or 순매도 했는지 일 수 변수
+print("------------------------")
+
+# 2-2. 기관 연속 수급 일수 가져오기 (20일간)
+successiveCompanyKOSPI2 = successiveCompany2.TwldayCompanyKOSPI()
+successiveCompanyKOSPI2 = successiveCompany2.TwldayCompanyKOSDAQ()
 print("------------------------")
 
 # 3. 외국인 선물 수급 일수 가져오기(7일간) - C
