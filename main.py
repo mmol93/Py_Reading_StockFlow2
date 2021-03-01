@@ -1,6 +1,7 @@
 import successiveForegin
 import successiveForegin2
 import dollarIndex
+import KdollarIndex
 import Future_foreignBuying
 import CustomerDiposit
 import CustomerCredit
@@ -51,6 +52,10 @@ print("------------------------")
 # 4. 달러 인덱스 7일치 확인 - C
 # 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
 successiveDollar = dollarIndex.dollarIndex()  # 몇 일간 연속으로 올랐는지 or 내렸는지 일 수 변수
+
+# 4-2. 한국 달러 인덱스 10일치 확인 - C
+# 반환값: 10일간의 누적 %
+successiveKDollar = KdollarIndex.KdollarIndex()
 print("------------------------")
 
 # 5. 고객 예탁금 확인 - C

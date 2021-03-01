@@ -39,7 +39,7 @@ def america():
             until(EC.presence_of_all_elements_located((By.XPATH, change_xpath)))
 
         change_element = change_element[0].text
-        change_element = change_element[:-1]
+        change_element = change_element[:-1]    # 마지막에 %를 제거하기
         change_integrate = change_integrate + float(change_element)
 
     # 일주일치 Date 데이터 얻기 - ok

@@ -49,7 +49,7 @@ def dollarIndex():
     # 출력할 데이터 - ok
     show_list = []
 
-    show_list.append("달러 인덱스: ")
+    show_list.append("미국 달러 인덱스: ")
     show_list.append(date_list[0])
     show_list.append(price_list[0])
     show_list.append(change_list)
