@@ -26,21 +26,25 @@ def customerDiposit():
         plus_shock = 0  # 변동율이 +2.5%를 넘어 갈 경우 카운트됨
         minus_shock = 0 # 변동율이 -2.5%를 넘어 갈 경우 카운트됨
 
+        intagrate_Result = 0 # 적산값 출력
+
 
         # 고객 예탁금 수치 뽑아내기
-        for i in range(4,14):
-            if 4 <= i <= 8 or 12 <= i <= 13:
+        for i in range(4, 17):
+            if 4 <= i <= 8 or 12 <= i <= 16:
                 xpath = xpath1 + str(i) + xpath2
-                singleData = WebDriverWait(driver, 12).until(EC.presence_of_element_located((By.XPATH, xpath))).text
+                singleData = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, xpath))).text
 
                 # 계산을 위해서 ,(콤마) 제거
                 singleData = singleData.replace(",", "")
                 numberDataList.append(singleData) # 최근 데이터의 인덱스가 빠름(예: 인덱스 0번에는 현재 or 오늘 데이터 들어감)
 
         # 위에서 뽑아낸 데이터 계산하여 변동량으로 나타내기
-        for i in range(0, 6):
+        for i in range(0, 9):
             singleData = (int(numberDataList[i]) - int(numberDataList[i+1])) / int(numberDataList[i+1]) * 100
             singleData = round(singleData, 2)   # 소수점 2자리 까지 반올림
+
+            intagrate_Result = singleData + intagrate_Result # 적산 값 출력(%를 적산하여 계산했음)
 
             # 변동율이 +-2.5%를 넘어 갈 경우 카운트
             if singleData >= 2.5:
@@ -64,7 +68,7 @@ def customerDiposit():
         plus_plus = 0
         minus_minus = 0
 
-        for i in range(0, 6):
+        for i in range(0, 9):
             singleData = perDataList[i]
 
             # 첫 수급의 플러스, 마이너스 확인하기
@@ -107,10 +111,11 @@ def customerDiposit():
             total.append("-" + str(minus_minus))
 
         print("<고객예탁금(6일간)>[+-2.5% 변동율, 연속 증가/감소]",end="")
+        print(round(intagrate_Result, 2), end="%, ")
         print(total, end="")
         print(driver.current_url)
 
-        return total
+        return round(intagrate_Result, 2)
     except:
         print("# 신용잔고 데이터 가져오기 통신에러")
         driver.quit()

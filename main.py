@@ -16,7 +16,6 @@ import EWY
 print("실시 날짜: " + str(datetime.datetime.now().strftime("%Y/%m/%d, %H:%M")))
 # TEST
 
-
 # 1. 외국인 연속 수급 일수 가져오기(7일간) - C
 # 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
 successiveForeginKOSPI = successiveForegin.FivedayForeignKOSPI()    # 몇 일간 순매수 or 순매도 했는지 일 수 변수
@@ -28,7 +27,6 @@ print("------------------------")
 successiveForeginKOSPI2 = successiveForegin2.TwldayForeignKOSPI()
 successiveForeginKOSDAQ2 = successiveForegin2.TwldayForeignKOSDAQ()
 print("------------------------")
-
 
 
 # 2. 기관 연속 수급 일수 가져오기 (7일간)
@@ -71,20 +69,7 @@ print("------------------------")
 EWY.EWY_Graph()
 print("------------------------")
 
-## 1,2,3,4,5 번의 조합 결과
-if successiveDollar[0] == "+" and int(successiveDollar[1]) >= 3 and \
-        Future_foreignBuying[0] == "-" and int(Future_foreignBuying[1]) >= 2 and \
-        successiveForeginKOSPI[0] == "-" and int(successiveForeginKOSPI[1]) >= 2 and CustomerDiposit_val[0] <= -1:
-    print("달러 인덱스 3일 연속 상승 + 외국인 선물 2일 연속 매도 + 외국인 현물 2일 이상 매도  + 예탁금 2.5% 빠짐 1번 이상 => 코스피 하락장")
-    print("------------------------")
-
-if successiveDollar[0] == "-" and int(successiveDollar[1]) >= 3 and \
-        Future_foreignBuying[0] == "+" and int(Future_foreignBuying[1]) >= 2 and \
-        successiveForeginKOSPI[0] == "+" and int(successiveForeginKOSDAQ[1]) >= 2 and CustomerDiposit_val[0] >= 1:
-    print("달러 인덱스 3일 연속 하락 + 외국인 선물 2일 연속 매수 + 외국인 현물 2일 이상 매수 + + 예탁금 2.5% 증가 1번 이상 => 코스닥 상승장")
-    print("------------------------")
-
-# 7. 코스피 외인 매매금액과 코스피 상위 top10 종목의 외인 매매금액 비교하기(7일간)
+# 9. 코스피 외인 매매금액과 코스피 상위 top10 종목의 외인 매매금액 비교하기(7일간)
 print("<코스피 외인 매매금액과 top10 외인 매매금액 비교>(2% 이상)", end="")
 KospiTopTen.kospiTopTen()
 print("")
@@ -92,8 +77,11 @@ print("------------------------")
 
 time.sleep(3)
 
-# 8. 코스닥 외인 매매금액과 코스닥 상위 top10 종목의 외인 매매금액 비교하기(7일간)
+# 10. 코스닥 외인 매매금액과 코스닥 상위 top10 종목의 외인 매매금액 비교하기(7일간)
 print("<코스닥 외인 매매금액과 top10 외인 매매금액 비교>(2% 이상)", end="")
 KosdaqTopTen.kosdaqTopTen()
 print("")
 print("------------------------")
+
+
+# 종합 결과 분석
