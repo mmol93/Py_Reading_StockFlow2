@@ -18,7 +18,7 @@ def KdollarIndex():
     time.sleep(2)
 
     change_list = []
-    change_Result = 0
+    change_integrate = 0
     # 10일치 change 데이터 얻기 - ok
     for i in range(1, 11):
         change_xpath = "//*[@id='boxHistories']/div[1]/div[2]/div/table/tbody/tr[" + str(i) + "]/td[4]/span"
@@ -29,14 +29,15 @@ def KdollarIndex():
         change_element = change_element[0].text  # 원하는 항목만 가져옴
         change_element = change_element[:-1]    # 마지막에 %를 제거해준다
 
-        change_Result = change_Result + float(change_element)
+        change_integrate = change_integrate + float(change_element)
 
     show_List = []
 
-    show_List.append("10일간 누적%: " + str(round(change_Result, 2)) + "%")
+    show_List.append("10일간 누적%: " + str(round(change_integrate, 2)) + "%")
     show_List.append(change_list)
+    show_List.append(driver.current_url)
 
     print("<한국 달러 인덱스(10일간)> ", end="")
     print(show_List)    # 결과값 출력
 
-    return round(change_Result, 2)
+    return round(change_integrate, 2)

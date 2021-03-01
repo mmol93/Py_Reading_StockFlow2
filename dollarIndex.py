@@ -28,6 +28,7 @@ def dollarIndex():
         price_list.append(price_element[0].text)
 
     change_list = []
+    change_integrate = 0
     # 일주일치 change 데이터 얻기 - ok
     for i in range(1, 8):
         change_xpath = "//*[@id='curr_table']/tbody/tr[" + str(i) + "]/td[7]"
@@ -35,6 +36,10 @@ def dollarIndex():
             until(EC.presence_of_all_elements_located((By.XPATH, change_xpath)))
 
         change_list.append(change_element[0].text)
+        change_element = change_element[0].text  # 원하는 항목만 가져옴
+        change_element = change_element[:-1]  # 마지막에 %를 제거해준다
+
+        change_integrate = change_integrate + float(change_element)
 
     # 일주일치 Date 데이터 얻기 - ok
     date_list = []
@@ -45,16 +50,13 @@ def dollarIndex():
 
         date_list.append(date_element[0].text)
 
-
     # 출력할 데이터 - ok
     show_list = []
-
-    show_list.append("미국 달러 인덱스: ")
-    show_list.append(date_list[0])
-    show_list.append(price_list[0])
+    show_list.append("7일간 누적%: " + str(round(change_integrate, 2)) + "%")
     show_list.append(change_list)
     show_list.append(driver.current_url)
 
+    print("<미국 달러 인덱스(7일간)>", end="")
     print(show_list)
 
     driver.close()
@@ -93,7 +95,4 @@ def dollarIndex():
             stoper = 1
 
     # 다른 요소와 연계하기 위해 반환값 주기
-    if plus_plus >= 1:
-        return "+" + str(plus_plus)
-    elif minus_minus >= 1:
-        return "-" + str(minus_minus)
+    return change_integrate

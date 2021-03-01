@@ -76,7 +76,7 @@ def futureForeign():
             total.append(str(minus_minus) + "일 연속 매도")
         total.append("(" + str(plus) + ")일 매수")
         total.append("(" + str(minus) + ")일 매도")
-        total.append(accumulate_sum)
+        total.append("누적금액: " + str(accumulate_sum))
         total.append(driver.current_url)
 
         # 출력 메시지 설정
@@ -84,10 +84,7 @@ def futureForeign():
         print(total)
 
         # 다른 요소와 연계하기 위해 반환값 주기
-        if plus_plus >= 1:
-            return "+" + str(plus_plus)
-        elif minus_minus >= 1:
-            return "-" + str(minus_minus)
+        return accumulate_sum
 
     except:
         print("# 선물 외국인 수급 데이터 가져오기 통신에러")

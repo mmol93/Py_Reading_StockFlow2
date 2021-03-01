@@ -68,7 +68,7 @@ def FivedayCompanyKOSPI():
             total.append(str(minus_minus) + "일 연속 매도")
         total.append("(" + str(plus) + ")일 매수")
         total.append("(" + str(minus) + ")일 매도")
-        total.append(accumulate_sum)
+        total.append("누적금액: " + str(accumulate_sum))
         total.append(driver.current_url)
 
         # 출력 메시지 설정
@@ -76,10 +76,7 @@ def FivedayCompanyKOSPI():
         print(total)
 
         # 다른 요소와 연계하기 위해 반환값 주기
-        if plus_plus >= 1:
-            return "+" + str(plus_plus)
-        elif minus_minus >= 1:
-            return "-" + str(minus_minus)
+        return accumulate_sum
 
     except:
         print("코스피 기관 수급 7일치 가져오기 - 현물 통신에러")
@@ -105,7 +102,6 @@ def FivedayCompanyKOSDAQ():
         minus = 0   # 마이너스일 경우 +1
         plus_plus = 0   # 연속 +
         minus_minus = 0 # 연속 -
-        final_sign = "" # 최근 연속 매도 매수의 +, - 부호(예: 최근 3일 연속 매수일 경우 +)
         accumulate_sum = 0  # 7일간 매도량, 매수량의 누적 계산 데이터
         stoper = 0
         for i in range(1, 8):
@@ -149,7 +145,7 @@ def FivedayCompanyKOSDAQ():
             total.append(str(minus_minus) + "일 연속 매도")
         total.append("(" + str(plus) + ")일 매수")
         total.append("(" + str(minus) + ")일 매도")
-        total.append(accumulate_sum)
+        total.append("누적금액: " + str(accumulate_sum))
         total.append(driver.current_url)
 
         # 출력 메시지 설정

@@ -55,8 +55,7 @@ def america():
         show_list = []
 
         show_list.append("미국 10년 채권: ")
-        show_list.append(date_list[0])
-        show_list.append(str(round(change_integrate, 2))+"%")
+        show_list.append("14일치 누적: "+str(round(change_integrate, 2))+"%")
         show_list.append(change_list)
         show_list.append(driver.current_url)
 

@@ -26,6 +26,8 @@ def customerCredit():
         plus_shock = 0  # 변동율이 +2.5%를 넘어 갈 경우 카운트됨
         minus_shock = 0 # 변동율이 -2.5%를 넘어 갈 경우 카운트됨
 
+        intagrate_Result = 0  # 적산값 출력
+
 
         # 신용잔고 수치 뽑아내기
         for i in range(4,14):
@@ -41,6 +43,8 @@ def customerCredit():
         for i in range(0, 6):
             singleData = (int(numberDataList[i]) - int(numberDataList[i+1])) / int(numberDataList[i+1]) * 100
             singleData = round(singleData, 2)   # 소수점 2자리 까지 반올림
+
+            intagrate_Result = singleData + intagrate_Result  # 적산 값 출력(%를 적산하여 계산했음)
 
             # 변동율이 +-2.5%를 넘어 갈 경우 카운트
             if singleData >= 2.5:
@@ -106,7 +110,10 @@ def customerCredit():
         elif minus_minus >= 1:
             total.append("-" + str(minus_minus))
 
-        print("<신용잔고(6일간)>[+-2.5% 변동율, 연속 증가/감소]", end="")
+        print("<신용잔고(6일간)> ", end="")
+        print("6일간 누적%: ", end="")
+        print(str(round(intagrate_Result, 2)), end="%, ")
+        print("[+-2.5% 변동율, 연속 증가/감소]", end="")
         print(total, end="")
         print(driver.current_url)
 

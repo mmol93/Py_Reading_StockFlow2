@@ -77,7 +77,6 @@ def customerDiposit():
             elif i == 0 and singleData[0] == "+":
                 plus = 1
 
-
             # 연속 + or - 확인하기
             if i == 0 and plus == 1:
                 plus_plus = 1
@@ -110,12 +109,15 @@ def customerDiposit():
         elif minus_minus >= 1:
             total.append("-" + str(minus_minus))
 
-        print("<고객예탁금(6일간)>[+-2.5% 변동율, 연속 증가/감소]",end="")
-        print(round(intagrate_Result, 2), end="%, ")
+        print("<고객예탁금(6일간)> ", end="")
+        print("6일간 누적%: ", end="")
+        print(str(round(intagrate_Result, 2)), end="%, ")
+        print("[+-2.5% 변동율, 연속 증가/감소]", end="")
         print(total, end="")
         print(driver.current_url)
 
         return round(intagrate_Result, 2)
+
     except:
         print("# 신용잔고 데이터 가져오기 통신에러")
         driver.quit()
