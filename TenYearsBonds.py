@@ -30,6 +30,18 @@ def america():
 
         change_list.append(change_element[0].text)
 
+    change_integrate = 0
+
+    # 14일치 change 데이터 얻기 - ok
+    for i in range(1, 15):
+        change_xpath = "//*[@id='curr_table']/tbody/tr[" + str(i) + "]/td[6]"
+        change_element = WebDriverWait(driver, 25). \
+            until(EC.presence_of_all_elements_located((By.XPATH, change_xpath)))
+
+        change_element = change_element[0].text
+        change_element = change_element[:-1]
+        change_integrate = change_integrate + float(change_element)
+
     # 일주일치 Date 데이터 얻기 - ok
     date_list = []
     for i in range(1, 8):
@@ -44,7 +56,7 @@ def america():
 
         show_list.append("미국 10년 채권: ")
         show_list.append(date_list[0])
-        show_list.append(price_list[0])
+        show_list.append(str(round(change_integrate, 2))+"%")
         show_list.append(change_list)
         show_list.append(driver.current_url)
 
@@ -85,8 +97,4 @@ def america():
             elif i >= 1 and singleData[0] == "+" and minus_minus >= 1 and stoper == 0:
                 stoper = 1
 
-        # 다른 요소와 연계하기 위해 반환값 주기
-        if plus_plus >= 1:
-            return "+" + str(plus_plus)
-        elif minus_minus >= 1:
-            return "-" + str(minus_minus)
+        return change_integrate

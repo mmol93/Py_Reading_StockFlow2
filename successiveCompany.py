@@ -157,10 +157,7 @@ def FivedayCompanyKOSDAQ():
         print(total)
 
         # 다른 요소와 연계하기 위해 반환값 주기
-        if plus_plus >= 1:
-            return "+" + str(plus_plus)
-        elif minus_minus >= 1:
-            return "-" + str(minus_minus)
+        return accumulate_sum
 
     except:
         print("코스닥 기관 수급 7일치 가져오기 - 현물 통신에러")

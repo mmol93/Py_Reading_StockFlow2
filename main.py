@@ -18,24 +18,27 @@ print("실시 날짜: " + str(datetime.datetime.now().strftime("%Y/%m/%d, %H:%M"
 
 # 1. 외국인 연속 수급 일수 가져오기(7일간) - C
 # 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
+# 반환값: 7일치 누적 매도/매수 금액
 successiveForeginKOSPI = successiveForegin.FivedayForeignKOSPI()    # 몇 일간 순매수 or 순매도 했는지 일 수 변수
 successiveForeginKOSDAQ = successiveForegin.FivedayForeignKOSDAQ()  # 몇 일간 순매수 or 순매도 했는지 일 수 변수
 print("------------------------")
 
 # 1-2. 외국인 연속 수급 일수 가져오기(20일간) - C
 # # 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
+# 반환값: 20일치 누적 매도/매수 금액
 successiveForeginKOSPI2 = successiveForegin2.TwldayForeignKOSPI()
 successiveForeginKOSDAQ2 = successiveForegin2.TwldayForeignKOSDAQ()
 print("------------------------")
 
-
 # 2. 기관 연속 수급 일수 가져오기 (7일간)
 # 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
+# 반환값: 7일치 누적 매도/매수 금액
 successiveCompanyKOSPI = successiveCompany.FivedayCompanyKOSPI()    # 몇 일간 순매수 or 순매도 했는지 일 수 변수
 successiveCompanyKOSDAQ = successiveCompany.FivedayCompanyKOSDAQ()  # # 몇 일간 순매수 or 순매도 했는지 일 수 변수
 print("------------------------")
 
 # 2-2. 기관 연속 수급 일수 가져오기 (20일간)
+# 반환값: 20일치 누적 매도/매수 금액
 successiveCompanyKOSPI2 = successiveCompany2.TwldayCompanyKOSPI()
 successiveCompanyKOSPI2 = successiveCompany2.TwldayCompanyKOSDAQ()
 print("------------------------")
@@ -51,7 +54,7 @@ successiveDollar = dollarIndex.dollarIndex()  # 몇 일간 연속으로 올랐�
 print("------------------------")
 
 # 5. 고객 예탁금 확인 - C
-# 반환값 = 리스트(변동율+,-2.5% 이상 카운터, "xx 일간 연속 매도 or 매수"에서 xx 값)
+# 반환값: 10일치 누적 %
 CustomerDiposit_val = CustomerDiposit.customerDiposit()
 print("------------------------")
 
@@ -62,6 +65,7 @@ print("------------------------")
 
 # 7. 매국 10년물 채권금리 - C
 ## 표기형식 예시 : 3일 상숭 = +3, 3일 하락 = -3
+# 반환값: 14일치 누적 %
 TenYearsBonds_val = TenYearsBonds.america()
 print("------------------------")
 
