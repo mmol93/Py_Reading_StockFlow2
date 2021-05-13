@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import datetime
+import controlExcel
 
 ## 코스닥 top10 종목에서 각 종목의 외국인 매매금액과 코스닥 전체의 외국인 매매금액의 차이를 구하고
 ## 조건에 따른 메시지를 출력하게 한다(7일간)
@@ -203,12 +204,18 @@ def kosdaqTopTen():
                     # 개별 종목도 외인들 순매수 + 코스피도 외인 순매수일 때 출력
                     else:
                         print(stockNameList[i] + ": " + str(z + 1) + "일 전에 외인들이 코스닥의 " + str(per_result) + "% 만큼 '매수'함 / ", end="")
+                        # 당일의 매수일 때만 종목을 엑셀에 기록한다
+                        if z+1 == 1:
+                            controlExcel.add_stock(stockNameList[i], url)
                 # 위 결과가 -3%를 넘을 경우 메시지 표기
                 if per_result <= -2.0:
                     # 코스닥은 외인 순매도이지만, 개별 종목의 순매수 금액이 지수 매도금액의 3%를 넘으면 "역매수"로 표기하게 한다
                     # 즉, 개별 종목은 순매수(+), 지수의 외인 매매는 순매도로 (-) 이며동시에 연산 결과가 -3% 이하인 애들
                     if priceXamountList[z] >= 0 and kosdaqForeignBuying_List[z] <= 0:
                         print(stockNameList[i] + ": " + str(z + 1) + "일 전에 외인들이 코스닥의 " + str(per_result * -1) + "% 만큼 '역매수'함 / ", end="")
+                        # 당일의 매수일 때만 종목을 엑셀에 기록한다
+                        if z + 1 == 1:
+                            controlExcel.add_stock(stockNameList[i], url)
     except TimeoutException:
         driver.quit()
         print("")
