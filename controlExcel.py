@@ -31,7 +31,7 @@ def saveExcell(load_wb):
     except PermissionError:
         print("열려있는 AI_List.xlsx 엑셀을 닫으세요")
 
-# 셀에 종목 기록하기
+# 셀에 종목 기록하기(사용하지 않는 중)
 def add_stock(stock, url):
     for i in range(2, 200):
         # 'B2'부터 'B100'까지 읽기

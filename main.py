@@ -13,6 +13,7 @@ import successiveCompany
 import successiveCompany2
 import TenYearsBonds
 import EWY
+import averageLine
 
 print("실시 날짜: " + str(datetime.datetime.now().strftime("%Y/%m/%d, %H:%M")))
 # TEST
@@ -92,5 +93,8 @@ KosdaqTopTen.kosdaqTopTen()
 print("")
 print("------------------------")
 
+# 코스피의 평균선 구하기
+averageLine.run("https://finance.daum.net/domestic/kospi")
 
-# 종합 결과 분석
+# 코스닥의 평균선 구하기
+averageLine.run("https://finance.daum.net/domestic/kosdaq")
