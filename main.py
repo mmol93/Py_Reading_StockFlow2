@@ -94,7 +94,7 @@ print("")
 print("------------------------")
 
 # 코스피의 평균선 구하기
-averageLine.run("https://finance.daum.net/domestic/kospi")
+averageLine.index("https://finance.daum.net/domestic/kospi", "kospi")
 
 # 코스닥의 평균선 구하기
-averageLine.run("https://finance.daum.net/domestic/kosdaq")
+averageLine.index("https://finance.daum.net/domestic/kosdaq", "kosdaq")

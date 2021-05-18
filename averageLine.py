@@ -6,10 +6,11 @@ from selenium.webdriver.support import expected_conditions as EC
 import datetime
 import controlExcel
 import time
+import controlExcel
 
 # 코스피의 5일, 20일, 60일, 120일 평균선을 구한다
 # 매개변수 = 다음 금융의 코스피 or 코스닥
-def run(url):
+def index(url, index):
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
     options.add_argument("disable-gpu")
@@ -18,15 +19,15 @@ def run(url):
 
     driver.get(url)
 
-    # 실시간 코스피 시세(xpath로 안되서 selector 사용)
+    # 실시간 코스피 or 코스닥 시세(xpath로 안되서 selector 사용)
     selctor = "div > span.numB.down > strong"
     cur_kospi = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, selctor))).text
 
-    # 실시간 코스피의 등락률
+    # 실시간 코스피 or 코스닥 등락률
     xpath = "//*[@id='boxDashboard']/div[1]/div/span[1]/p[2]"
     cur_kospiRatio = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath))).text
 
-    # 코스피의 지난 기록 가져오기
+    # 코스피 or 코스닥 지난 기록 가져오기
     history = []
     i = 1  # 표의 row
     j = 1  # 표의 페이지
@@ -76,3 +77,6 @@ def run(url):
     print(average20)
     print(average60)
     print(average120)
+
+    # 엑셀에 기록 후 저장
+    controlExcel.writeIndex(index, average5, average20, average60, average120)

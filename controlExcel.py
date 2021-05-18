@@ -1,5 +1,6 @@
 from openpyxl import load_workbook
 import getpass
+import datetime
 
 ## 불러올 엑셀 파일 설정
 
@@ -17,7 +18,7 @@ path = path1 + str(userName) + path2
 load_wb = load_workbook(path, data_only=True)
 
 # 불러올 시트 설정
-load_sheet = load_wb['매수추천']
+load_sheet = load_wb['평균선']
 
 StockList = []  # 인공지능 종목 리스트
 webPageList = []  # 인공지능 추천가
@@ -31,18 +32,32 @@ def saveExcell(load_wb):
     except PermissionError:
         print("열려있는 AI_List.xlsx 엑셀을 닫으세요")
 
-# 셀에 종목 기록하기(사용하지 않는 중)
-def add_stock(stock, url):
-    for i in range(2, 200):
-        # 'B2'부터 'B100'까지 읽기
-        stock_name = load_sheet.cell(i, 2).value
-        # 셀 비었으면 종목명, 해당 종목의 URL 기록하고 함수 종료
-        if stock_name == None:
-            load_sheet.cell(i, 2).value = stock
-            load_sheet.cell(i, 3).value = url
-            break
-        # 셀에 뭔가 적혀있으면 다음 셀로 이동
-        else:
-            continue
-# 엑셀 저장
+# 셀에 종목 기록하기(코스피, 코스닥만)
+# 매개변수 설명
+# 1. 코스닥인지 코스피인지 명시
+# 2~5. 5일, 20일, 60일, 120일 데이터 넣기
+def writeIndex(index,
+               average5,
+               average20,
+               average60,
+               average120):
+    today = datetime.datetime.now()
+    today = today.strftime("%Y-%m-%d")
+    load_sheet.cell(3, 2).value = str(today)
+
+    if index == "kospi":
+        # 'C5'~'F5'까지 적어넣기
+        load_sheet.cell(5, 3).value = str(average5)
+        load_sheet.cell(5, 4).value = str(average20)
+        load_sheet.cell(5, 5).value = str(average60)
+        load_sheet.cell(5, 6).value = str(average120)
+
+    elif index == "kosdaq":
+        # 'C6'~'F6'까지 적어넣기
+        load_sheet.cell(6, 3).value = str(average5)
+        load_sheet.cell(6, 4).value = str(average20)
+        load_sheet.cell(6, 5).value = str(average60)
+        load_sheet.cell(6, 6).value = str(average120)
+
+    # 엑셀 저장
     saveExcell(load_wb)
