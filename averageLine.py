@@ -20,12 +20,20 @@ def index(url, index):
     driver.get(url)
 
     # 실시간 코스피 or 코스닥 시세(xpath로 안되서 selector 사용)
-    selctor = "div > span.numB.down > strong"
-    cur_kospi = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, selctor))).text
+    try:
+        selctor = "#boxDashboard > div.currentStk > div > span.numB.up > strong"
+        cur_kospi = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, selctor))).text
+    except:
+        xpath = "#boxDailyHistory > div.box_contents > div > table > tbody > tr.first > td:nth-child(4) > span"
+        cur_kospi = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath))).text
 
     # 실시간 코스피 or 코스닥 등락률
-    xpath = "//*[@id='boxDashboard']/div[1]/div/span[1]/p[2]"
-    cur_kospiRatio = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath))).text
+    try:
+        xpath = "//*[@id='boxDashboard']/div[1]/div/span[1]/p[2]"
+        cur_kospiRatio = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath))).text
+    except:
+        selector = "#boxDashboard > div.currentStk > div > span.numB.up > p:nth-child(3)"
+        cur_kospiRatio = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, selector))).text
 
     # 코스피 or 코스닥 지난 기록 가져오기
     history = []
@@ -57,9 +65,7 @@ def index(url, index):
         data = data.replace(",", "")
         # 데이터를 숫다로 바꾼다
         history.append(float(data))
-        print(data)
         i += 1
-    print(len(history))
     # 5일
     average5 = sum(history[:5]) / 5
 
@@ -72,11 +78,11 @@ def index(url, index):
     # 120일
     average120 = sum(history) / len(history)
 
-    print(cur_kospi)
-    print(average5)
-    print(average20)
-    print(average60)
-    print(average120)
+    print(f"현재값: {cur_kospi}")
+    print(f"average5: {average5}")
+    print(f"average20: {average20}")
+    print(f"average60: {average60}")
+    print(f"average120: {average120}")
 
     # 엑셀에 기록 후 저장
     controlExcel.writeIndex(index, average5, average20, average60, average120)
