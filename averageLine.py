@@ -67,16 +67,16 @@ def index(url, index):
         history.append(float(data))
         i += 1
     # 5일
-    average5 = sum(history[:5]) / 5
+    average5 = round(sum(history[:5]) / 5, 1)
 
     # 20일
-    average20 = sum(history[:20]) / 20
+    average20 = round(sum(history[:20]) / 20, 1)
 
     # 60일
-    average60 = sum(history[:60]) / 60
+    average60 = round(sum(history[:60]) / 60, 1)
 
     # 120일
-    average120 = sum(history) / len(history)
+    average120 = round(sum(history) / len(history), 1)
 
     print(f"현재값: {cur_kospi}")
     print(f"average5: {average5}")
