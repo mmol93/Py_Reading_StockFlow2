@@ -19,13 +19,15 @@ def index(url, index):
 
     driver.get(url)
 
-    # 실시간 코스피 or 코스닥 시세(xpath로 안되서 selector 사용)
+    # 실시간 시세의 경우 상승/하락에 따라 selector 값이 달라진다
     try:
-        selctor = "#boxDashboard > div.currentStk > div > span.numB.up > strong"
+        # 하락 시
+        selctor = "#boxDashboard > div.currentStk > div > span.numB.down > strong"
         cur_kospi = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, selctor))).text
     except:
-        xpath = "#boxDailyHistory > div.box_contents > div > table > tbody > tr.first > td:nth-child(4) > span"
-        cur_kospi = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath))).text
+        # 상승 시
+        selctor = "#boxDashboard > div.currentStk > div > span.numB.up > strong"
+        cur_kospi = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, selctor))).text
 
     # 실시간 코스피 or 코스닥 등락률
     try:
