@@ -92,9 +92,3 @@ print("<코스닥 외인 매매금액과 top10 외인 매매금액 비교>(2% �
 KosdaqTopTen.kosdaqTopTen()
 print("")
 print("------------------------")
-
-# 코스피의 평균선 구하기
-averageLine.index("https://finance.daum.net/domestic/kospi", "kospi")
-
-# 코스닥의 평균선 구하기
-averageLine.index("https://finance.daum.net/domestic/kosdaq", "kosdaq")
